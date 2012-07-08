@@ -1,12 +1,17 @@
 $(document).ready(function () {
-    var apiRoot = 'http://localhost/php-oauth';
-    var apiScopes = ["oauth_admin", "oauth_approval", "oauth_userinfo"];
     var apiClientId = 'manage';
+    var redirectUri = "http://localhost/html-manage-oauth/index.html";
+
+    var apiScopes = ["oauth_admin", "oauth_approval", "oauth_userinfo"];
+
+    var apiRoot = 'http://localhost/php-oauth';
+    var oauthRoot = 'http://localhost/php-oauth';
+
     jso_configure({
         "admin": {
             client_id: apiClientId,
-            redirect_uri: "http://localhost/html-manage-oauth/index.html",
-            authorization: apiRoot + "/oauth/authorize"
+            redirect_uri: redirectUri,
+            authorization: oauthRoot + "/oauth/authorize"
         }
     });
     jso_ensureTokens({
@@ -43,7 +48,7 @@ $(document).ready(function () {
 
     function getResourceOwner() {
         $.oajax({
-            url: apiRoot + "/oauth/userinfo",
+            url: oauthRoot + "/oauth/userinfo",
             jso_provider: "admin",
             jso_scopes: apiScopes,
             jso_allowia: true,
