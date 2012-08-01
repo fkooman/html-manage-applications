@@ -1,7 +1,0 @@
-- MANAGEMENT WEB INTERFACE
-  - make it impossible to remove/edit the management client through the
-    webinterface to make it impossible to lock yourself out.
-  - implement a approval/token revoke dialog in the manage interface (next to 
-    client administration, for normal users)
-  - for "web application" clients a secret is needed, for other clients no
-    - hide it in the interface when switching the select box for client profile

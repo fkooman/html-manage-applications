@@ -1,105 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8">
-    <title>OAuth Management Interface</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="ext/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-    <link href="ext/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <title>Applications</title>
+    <script src="ext/js/jquery.js"></script>
+    <script src="ext/js/jsrender.js"></script>
+    <script src="ext/js/jso.js"></script>
+    <script src="js/manage.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
   </head>
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">OAuth Management Interface</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a id="clientsButton" href="#">Registered Applications</a></li>
-              <li><a id="approvalsButton" href="#">My Authorized Applications</a></li>
-            </ul>
-            <div class="btn-group pull-right">
-                <a href="#" id="userId" class="btn"><i class="icon-user"></i> </a>
-            </div>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+    <div id="editApplication"></div>
 
-    <div class="container">
+    <div id="applications">
+        <h1>Applications</h1>
 
-    <div id="registeredClientsList">
-        <h1>Registered Applications</h1>
+        <button id="addApplication">Add Application</button>
 
-        <a class="btn btn-success pull-right addClient" data-toggle="modal" href="#editModal"><i class="icon-plus-sign icon-white"></i> Add New Client</a>
-
-        <table class="table table-striped">
-        	<tbody id="clientList"></tbody>
+        <table id="applicationTable">
+            <tr><th>Application</th><th>Actions</th></tr>
+        	<tbody id="applicationList"></tbody>
         </table>
+
+        <p><small>Just some text...</small></p>
     </div>
-    <div id="approvedClientsList">
-        <h1>My Authorized Applications</h1>
 
-        <table class="table table-striped">
-        	<tbody id="approvalList"></tbody>
-        </table>
-    </div>
-    
-        <div class="modal" id="editModal">
-         </div>
-
-    </div> <!-- /container -->
-
-    <script id="approvalListTemplate" type="text/x-jsrender">
+    <script id="applicationListTemplate" type="text/x-jsrender">
         <tr>
             <td><span title="{{:description}}">{{:name}}</span></td>
             <td>
-                <a class="btn btn-danger deleteApproval" data-client-name="{{:name}}" data-client-id="{{:id}}" href="#"><i class="icon-trash icon-white"></i> Delete</a>
-            </td>
-        </tr>
-    </script>
-
-    <script id="clientListTemplate" type="text/x-jsrender">
-        <tr>
-            <td><span title="{{:description}}">{{:name}}</span></td>
-            <td>
-                <a class="btn btn-primary editClient" data-client-id="{{:id}}" data-toggle="modal" href="#editModal"><i class="icon-edit icon-white"></i> Edit</a>
-                <a class="btn btn-danger deleteClient" data-client-name="{{:name}}" data-client-id="{{:id}}" href="#"><i class="icon-trash icon-white"></i>  Delete</a>
+                <button class="editApplication" data-client-id="{{:id}}">Edit</button>
+                <button class="deleteApplication" data-client-name="{{:name}}" data-client-id="{{:id}}">Delete</button>
             </td>
         </tr>
     </script>
    
-    <script id="clientEditTemplate" type="text/x-jsrender">
-           <div class="modal-header">
-                <a class="close" data-dismiss="modal">×</a>
-                <h3>Edit</h3>
-            </div>
-            <div class="modal-body">
-                <form class="editClient form-vertical">
+    <script id="applicationEditTemplate" type="text/x-jsrender">
+
+          <form class="editApplication">
             <fieldset>
-                <!-- <legend>Legend text</legend> -->
-                <div class="control-group">
-                    <label class="control-label" for="form_id">Identifier <i class="icon-info-sign" title="Identifier" data-content="A unique identifier for the OAuth client. If this field is left empty a client identifier will be generated."></i></label>
+                    <label for="form_id" title="A unique identifier for the OAuth client. If this field is left empty a client identifier will be generated.">Identifier</label>
                     <div class="controls">
                         {{if id}}
                             <input type="text" class="input-xlarge uneditable-input" id="form_id" name="id" value="{{:id}}" >
@@ -108,18 +49,18 @@
                         {{/if}}
                     </div>
 
-                    <label class="control-label" for="form_name">Name <i class="icon-info-sign" title="Name" data-content="The display name for the OAuth client"></i></label>
+                    <label for="form_name" title="The display name for the OAuth client.">Name</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="form_name" name="name" value="{{:name}}" >
                     </div>
 
-                    <label class="control-label" for="form_description">Description <i class="icon-info-sign" title="Description" data-content="Detailed information about the OAuth client."></i></label>
+                    <label for="form_description" title="Detailed information about the OAuth client.">Description</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="form_description" name="description" value="{{:description}}" >
 
                     </div>
 
-                    <label class="control-label" for="form_type">Profile <i class="icon-info-sign" title="Profile" data-content="<strong>Web Application</strong>: A client running on a web server, like 3-legged OAuth 1.0a, requires a secret;<br><strong>User-agent-based Application</strong>: The client runs in the web browser only;<br><strong>Native Application</strong>: The client runs on a mobile device or is a 'rich' desktop application."></i></label>
+                    <label for="form_type" title="<strong>Web Application</strong>: A client running on a web server, like 3-legged OAuth 1.0a, requires a secret;<br><strong>User-agent-based Application</strong>: The client runs in the web browser only;<br><strong>Native Application</strong>: The client runs on a mobile device or is a 'rich' desktop application.">Profile</label>
                     <div class="controls">
                         <select class="input-xlarge" id="form_type" name="type">
                             <option value="web_application" {{if type === 'web_application' }} selected="selected" {{/if}}>Web Application</option>
@@ -128,37 +69,23 @@
                         </select>
                     </div>
 
-                    <label class="control-label" for="form_secret">Secret <i class="icon-info-sign" title="Secret" data-content="Secret for the OAuth client (only for the <strong>Web Application</strong> profile). If this field is left empty a secret will be generated."></i></label>
+                    <label for="form_secret" title="Secret for the OAuth client (only for the <strong>Web Application</strong> profile). If this field is left empty a secret will be generated.">Secret</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="form_secret" name="secret" value="{{:secret}}" >
                     </div>
 
-                    <label class="control-label" for="form_redirect_uri">Redirect URI <i class="icon-info-sign" title="Redirect URI" data-content="Redirect URI of the Client for redirecting the browser after authentication and authorization."></i></label>
+                    <label for="form_redirect_uri" title="Redirect URI of the Client for redirecting the browser after authentication and authorization.">Redirect URI</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="form_redirect_uri" name="redirect_uri" value="{{:redirect_uri}}" >
                     </div>
-                </div>
+
             </fieldset>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a href="#" data-client-id="{{:id}}" class="btn editClose">Close</a>
-                <a href="#" data-client-id="{{:id}}" class="btn btn-primary editSave">Save changes</a>
-            </div>
+          </form>
+
+          <button data-client-id="{{:id}}" class="editClose">Close</button>
+          <button data-client-id="{{:id}}" class="editSave">Save</button>
 
     </script>
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="ext/js/jquery.js"></script>
-    <script src="ext/js/jsrender.js"></script>
-    <script src="ext/js/jso.js"></script>
-    <script src="ext/js/bootstrap-modal.js"></script>
-    <script src="ext/js/bootstrap-tooltip.js"></script>
-    <script src="ext/js/bootstrap-popover.js"></script>
-    <script src="manage.js"></script>
-
   </body>
 </html>
 
