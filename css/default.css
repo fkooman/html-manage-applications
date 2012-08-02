@@ -8,8 +8,8 @@ h1 {
 }
 
 div#applications {
-	max-width: 35em;
-	min-width: 25em;
+    max-width: 35em;
+    min-width: 25em;
     margin: 2em auto;
     padding: 10px;
     border: 1px solid rgba(0, 0, 0, 0.3);
