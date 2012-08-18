@@ -25,6 +25,10 @@ $(document).ready(function () {
             success: function (data) {
                 $("#applicationList").html($("#applicationListTemplate").render(data));
                 addApplicationListHandlers();
+            },
+            error: function (xhr) {
+                var data = JSON.parse(xhr.responseText);
+                alert("ERROR: " + data.error_description);
             }
         });
     }
@@ -49,6 +53,10 @@ $(document).ready(function () {
             type: "DELETE",
             success: function (data) {
                 renderApplicationList();
+            },
+            error: function (xhr) {
+                var data = JSON.parse(xhr.responseText);
+                alert("ERROR: " + data.error_description);
             }
         });
     }
@@ -64,6 +72,10 @@ $(document).ready(function () {
                 success: function (data) {
                     $("#editApplication").html($("#applicationEditTemplate").render(data));
                     addEditApplicationHandlers();
+                },
+                error: function (xhr) {
+                    var data = JSON.parse(xhr.responseText);
+                    alert("ERROR: " + data.error_description);
                 }
             });
         } else {
@@ -112,6 +124,10 @@ $(document).ready(function () {
             success: function (data) {
                 $("#editApplication").hide();
                 renderApplicationList();
+            },
+            error: function (xhr) {
+                var data = JSON.parse(xhr.responseText);
+                alert("ERROR: " + data.error_description);
             }
         });
     }
@@ -128,6 +144,10 @@ $(document).ready(function () {
             success: function (data) {
                 $("#editApplication").hide();
                 renderApplicationList();
+            },
+            error: function (xhr) {
+                var data = JSON.parse(xhr.responseText);
+                alert("ERROR: " + data.error_description);
             }
         });
     }
