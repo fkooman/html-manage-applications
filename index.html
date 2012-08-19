@@ -41,7 +41,7 @@
 
           <form class="editApplication">
             <fieldset>
-                    <label for="form_id" title="A unique identifier for the OAuth client. If this field is left empty a client identifier will be generated.">Identifier</label>
+                    <label for="form_id" title="A unique identifier for the OAuth client. If this field is left empty a client identifier will be generated.">Identifier*</label>
                     <div class="controls">
                         {{if id}}
                             <input type="text" class="input-xlarge uneditable-input" id="form_id" name="id" value="{{:id}}" >
@@ -50,18 +50,12 @@
                         {{/if}}
                     </div>
 
-                    <label for="form_name" title="The display name for the OAuth client.">Name</label>
+                    <label for="form_name" title="The display name for the OAuth client.">Name*</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="form_name" name="name" value="{{:name}}" >
                     </div>
 
-                    <label for="form_description" title="Detailed information about the OAuth client.">Description</label>
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" id="form_description" name="description" value="{{:description}}" >
-
-                    </div>
-
-                    <label for="form_type" title="<strong>Web Application</strong>: A client running on a web server, like 3-legged OAuth 1.0a, requires a secret;<br><strong>User-agent-based Application</strong>: The client runs in the web browser only;<br><strong>Native Application</strong>: The client runs on a mobile device or is a 'rich' desktop application.">Profile</label>
+                    <label for="form_type" title="<strong>Web Application</strong>: A client running on a web server, like 3-legged OAuth 1.0a, requires a secret;<br><strong>User-agent-based Application</strong>: The client runs in the web browser only;<br><strong>Native Application</strong>: The client runs on a mobile device or is a 'rich' desktop application.">Profile*</label>
                     <div class="controls">
                         <select class="input-xlarge" id="form_type" name="type">
                             <option value="web_application" {{if type === 'web_application' }} selected="selected" {{/if}}>Web Application</option>
@@ -70,9 +64,20 @@
                         </select>
                     </div>
 
+                    <label for="form_redirect_uri" title="Redirect URI of the Client for redirecting the browser after authentication and authorization.">Redirect URI*</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="form_redirect_uri" name="redirect_uri" value="{{:redirect_uri}}" >
+                    </div>
+
                     <label for="form_secret" title="Secret for the OAuth client (only for the <strong>Web Application</strong> profile). If this field is left empty a secret will be generated.">Secret</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="form_secret" name="secret" value="{{:secret}}" >
+                    </div>
+
+                    <label for="form_description" title="Detailed information about the OAuth client.">Description</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="form_description" name="description" value="{{:description}}" >
+
                     </div>
 
                     <label for="form_icon" title="Full URL point to the icon for this service. This icon should have size 128x128 pixels.">Icon</label>
@@ -85,12 +90,9 @@
                         <input type="text" class="input-xlarge" id="form_allowed_scope" name="allowed_scope" value="{{:allowed_scope}}" >
                     </div>
 
-                    <label for="form_redirect_uri" title="Redirect URI of the Client for redirecting the browser after authentication and authorization.">Redirect URI</label>
-                    <div class="controls">
-                        <input type="text" class="input-xlarge" id="form_redirect_uri" name="redirect_uri" value="{{:redirect_uri}}" >
-                    </div>
-
+        <p><strong>* required</strong></p>
             </fieldset>
+
           </form>
 
           <button data-client-id="{{:id}}" class="editClose">Close</button>
