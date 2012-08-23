@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Applications</title>
     <script src="ext/js/jquery.js"></script>
     <script src="ext/js/jsrender.js"></script>
@@ -14,18 +16,20 @@
 
     <div id="editApplication"></div>
 
-    <div id="applications">
-        <h1>Applications</h1>
+    <div id="wrapper">
+        <div id="applications">
+            <h1>Applications</h1>
 
-        <button id="addApplication">Add Application</button>
+            <button id="addApplication">Add Application</button>
 
-        <table id="applicationTable">
-            <tr><th>Application</th><th>Actions</th></tr>
-        	<tbody id="applicationList"></tbody>
-        </table>
+            <table id="applicationTable">
+                <tr><th>Application</th><th>Actions</th></tr>
+            	<tbody id="applicationList"></tbody>
+            </table>
 
-        <p><small>Just some text...</small></p>
-    </div>
+            <p><small>Just some text...</small></p>
+        </div> <!-- /applications -->
+    </div> <!-- /wrapper -->
 
     <script id="applicationListTemplate" type="text/x-jsrender">
         <tr>

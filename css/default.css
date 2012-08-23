@@ -1,20 +1,29 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 85%;
+    background-color: #eee;
 }
 
 h1 {
     text-align: center;
 }
 
-div#applications {
-    max-width: 35em;
-    min-width: 25em;
+div#wrapper {
+    max-width: 480px;
     margin: 2em auto;
-    padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+div#applications {
+    max-width: 410px;
+    background: #fff;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin: 0 10px;
+    padding: 25px;
+    -moz-box-shadow:    0 0 3px 0 #8c8c8c;
+    -webkit-box-shadow: 0 0 3px 0 #8c8c8c;
+    box-shadow:         0 0 3px 0 #8c8c8c;
 }
 
 table#applicationTable {
