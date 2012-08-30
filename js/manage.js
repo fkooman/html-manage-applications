@@ -152,11 +152,34 @@ $(document).ready(function () {
         });
     }
 
+    function checkEntitlement() {
+        $.oajax({
+            url: apiEndpoint + "/resource_owner/entitlement",
+            jso_provider: "application_manager",
+            jso_scopes: apiScope,
+            jso_allowia: true,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                if(-1 === data.entitlement.indexOf("applications")) {
+                    alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
+                }
+            },
+            error: function (xhr) {
+                var data = JSON.parse(xhr.responseText);
+                alert("ERROR: " + data.error_description);
+            }
+        });
+
+    }
+
     $("button#addApplication").click(function () {
         editApplication();
     });
 
     function initPage() {
+        checkEntitlement();
         renderApplicationList();
     }
     initPage();
