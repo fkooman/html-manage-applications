@@ -1,67 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="HandheldFriendly" content="true" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Applications</title>
-    <script src="ext/js/jquery.js"></script>
-    <script src="ext/js/jsrender.js"></script>
-    <script src="ext/js/jso.js"></script>
-    <script src="js/manage.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/default.css">
-  </head>
-
-  <body>
-
+    <title>Application Management</title>
+    <!-- Bootstrap -->
+    <link href="ext/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="ext/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
     <div id="editApplication"></div>
 
-    <div id="wrapper">
+    <div class="container">
         <div id="applications">
             <h1>Applications</h1>
 
-            <button id="addApplication">Add Application</button>
+            <p class="lead">This page allows you to manage applications.</p>
 
-            <table id="applicationTable">
+            <button id="addApplication" class="btn btn-primary">Add Application</button>
+
+            <table id="applicationTable" class="table table-striped table-bordered">
+            <thead>
                 <tr><th>Application</th><th>Actions</th></tr>
+            </thead>
             	<tbody id="applicationList"></tbody>
             </table>
 
-            <p><small>Just some text...</small></p>
+            <p class="text-info"><span class="label label-info">Info</span> <small>This is the list of all applications registered with this OAuth service.</small></p>
+
         </div> <!-- /applications -->
-    </div> <!-- /wrapper -->
+    </div> <!-- /container -->
 
     <script id="applicationListTemplate" type="text/x-jsrender">
         <tr>
-            <td><span title="{{:description}}">{{:name}}</span></td>
+            <td><span title="{{:description}}">{{:name}}</span><a class="editApplication" data-client-id="{{:id}}" href="#"> <i class="icon-edit"></i></a></td>
             <td>
-                <button class="editApplication" data-client-id="{{:id}}">Edit</button>
-                <button class="deleteApplication" data-client-name="{{:name}}" data-client-id="{{:id}}">Delete</button>
+                <button class="btn btn-danger btn-small deleteApplication" data-client-name="{{:name}}" data-client-id="{{:id}}"><i class="icon-trash icon-white"></i> Delete</button>
             </td>
         </tr>
     </script>
    
     <script id="applicationEditTemplate" type="text/x-jsrender">
-
-          <form class="editApplication">
+        <div id="modal" class="modal">
+          <form class="form editApplication">
             <fieldset>
                     <label for="form_id" title="A unique identifier for the OAuth client. If this field is left empty a client identifier will be generated.">Identifier*</label>
                     <div class="controls">
-                        {{if id}}
-                            <input type="text" class="input-xlarge uneditable-input" id="form_id" name="id" value="{{:id}}" >
-                        {{else}}
-                            <input type="text" class="input-xlarge" id="form_id" name="id" value="{{:id}}" >
-                        {{/if}}
+                        <input type="text"  id="form_id" name="id" value="{{:id}}" >
                     </div>
 
                     <label for="form_name" title="The display name for the OAuth client.">Name*</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="form_name" name="name" value="{{:name}}" >
+                        <input type="text" id="form_name" name="name" value="{{:name}}" >
                     </div>
 
                     <label for="form_type" title="<strong>Web Application</strong>: A client running on a web server, like 3-legged OAuth 1.0a, requires a secret;<br><strong>User-agent-based Application</strong>: The client runs in the web browser only;<br><strong>Native Application</strong>: The client runs on a mobile device or is a 'rich' desktop application.">Profile*</label>
                     <div class="controls">
-                        <select class="input-xlarge" id="form_type" name="type">
+                        <select id="form_type" name="type">
                             <option value="web_application" {{if type === 'web_application' }} selected="selected" {{/if}}>Web Application</option>
                             <option value="user_agent_based_application" {{if type === 'user_agent_based_application' }} selected="selected" {{/if}}>User-agent-based Application</option>
                             <option value="native_application" {{if type === 'native_application' }} selected="selected" {{/if}}>Native Application</option>
@@ -70,38 +65,47 @@
 
                     <label for="form_redirect_uri" title="Redirect URI of the Client for redirecting the browser after authentication and authorization.">Redirect URI*</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="form_redirect_uri" name="redirect_uri" value="{{:redirect_uri}}" >
+                        <input type="text" id="form_redirect_uri" name="redirect_uri" value="{{:redirect_uri}}" >
                     </div>
 
                     <label for="form_secret" title="Secret for the OAuth client (only for the <strong>Web Application</strong> profile). If this field is left empty a secret will be generated.">Secret</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="form_secret" name="secret" value="{{:secret}}" >
+                        <input type="text" id="form_secret" name="secret" value="{{:secret}}" >
                     </div>
 
                     <label for="form_description" title="Detailed information about the OAuth client.">Description</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="form_description" name="description" value="{{:description}}" >
-
+                        <textarea id="form_description" name="description">{{:description}}</textarea>
                     </div>
 
                     <label for="form_icon" title="Full URL point to the icon for this service. This icon should have size 128x128 pixels.">Icon</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="form_icon" name="icon" value="{{:icon}}" >
+                        <input type="text" id="form_icon" name="icon" value="{{:icon}}" >
                     </div>
 
                     <label for="form_allowed_scope" title="The scope (space separated) the application is allowed to request">Allowed Scope</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="form_allowed_scope" name="allowed_scope" value="{{:allowed_scope}}" >
+                        <input type="text" id="form_allowed_scope" name="allowed_scope" value="{{:allowed_scope}}" >
                     </div>
 
-        <p><strong>* required</strong></p>
-            </fieldset>
+    <!--        <p><strong>* required</strong></p> -->
+
+
+          <button data-client-id="{{:id}}" class="btn btn-primary editSave">Save</button>
+          <button data-client-id="{{:id}}" class="btn editClose">Close</button>
+
+      </fieldset>
 
           </form>
-
-          <button data-client-id="{{:id}}" class="editSave">Save</button>
-          <button data-client-id="{{:id}}" class="editClose">Close</button>
+    </div> <!-- /modal -->
     </script>
+
+    <script src="ext/js/jquery.js"></script>
+    <script src="ext/js/jsrender.js"></script>
+    <script src="ext/js/jso.js"></script>
+<!--    <script src="ext/bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="js/manage.js"></script>
+
   </body>
 </html>
 

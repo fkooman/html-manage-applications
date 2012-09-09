@@ -34,7 +34,8 @@ $(document).ready(function () {
     }
 
     function addApplicationListHandlers() {
-        $("button.editApplication").click(function () {
+        $("a.editApplication").click(function () {
+//        $("button.editApplication").click(function () {
             editApplication($(this).data('clientId'));
         });
         $("button.deleteApplication").click(function () {

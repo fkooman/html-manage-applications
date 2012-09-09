@@ -14,6 +14,7 @@ This application depends on the following components:
 * jQuery
 * JSrender (JavaScript Template Rendering for jQuery)
 * JSO (JavaScript OAuth 2 client)
+* Bootstrap CSS
 
 It can easily be installed by running the following script:
 
