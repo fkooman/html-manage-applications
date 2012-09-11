@@ -5,7 +5,13 @@
 This application makes it possible to manage applications with the `php-oauth` 
 service through its API.
 
+## Screenshots
+
 ![html-manage-applications](https://github.com/fkooman/html-manage-applications/raw/master/docs/html-manage-applications-screenshot.png)
+
+![html-manage-applications-new-app-1](https://github.com/fkooman/html-manage-applications/raw/master/docs/html-manage-applications-new-app-screenshot-1.png)
+
+![html-manage-applications-new-app-2](https://github.com/fkooman/html-manage-applications/raw/master/docs/html-manage-applications-new-app-screenshot-2.png)
 
 ## Installation
 

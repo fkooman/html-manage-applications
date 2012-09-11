@@ -35,7 +35,6 @@ $(document).ready(function () {
 
     function addApplicationListHandlers() {
         $("a.editApplication").click(function () {
-//        $("button.editApplication").click(function () {
             editApplication($(this).data('clientId'));
         });
         $("button.deleteApplication").click(function () {
@@ -52,7 +51,7 @@ $(document).ready(function () {
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "DELETE",
-            success: function (data) {
+            success: function () {
                 renderApplicationList();
             },
             error: function (xhr) {
@@ -85,7 +84,7 @@ $(document).ready(function () {
             $("#editApplication").html($("#applicationEditTemplate").render(data));
             addEditApplicationHandlers();
         }
-        $("#editApplication").show();
+        $("#editApplication").modal();
     }
 
     function parseForm(formData) {
@@ -97,10 +96,10 @@ $(document).ready(function () {
     }
 
     function addEditApplicationHandlers() {
-        $("#editApplication button.editClose").click(function () {
-            $("#editApplication").hide();
+        $("#editApplication a.editClose").click(function () {
+            $("#editApplication").modal('hide');
         });
-        $("#editApplication button.editSave").click(function () {
+        $("#editApplication a.editSave").click(function () {
             // FIXME: not really a nice way to fetch form data...
             var clientData = parseForm($('form.editApplication'));
             if ($(this).data('clientId')) {
@@ -120,10 +119,10 @@ $(document).ready(function () {
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "PUT",
-            dataType: 'json',
+            contentType: 'application/json',
             data: clientData,
-            success: function (data) {
-                $("#editApplication").hide();
+            success: function () {
+                $("#editApplication").modal('hide');
                 renderApplicationList();
             },
             error: function (xhr) {
@@ -140,10 +139,10 @@ $(document).ready(function () {
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "POST",
-            dataType: 'json',
+            contentType: 'application/json',
             data: clientData,
-            success: function (data) {
-                $("#editApplication").hide();
+            success: function () {
+                $("#editApplication").modal('hide');
                 renderApplicationList();
             },
             error: function (xhr) {
