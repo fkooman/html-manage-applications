@@ -162,7 +162,7 @@ $(document).ready(function () {
             dataType: 'json',
             async: false,
             success: function (data) {
-                if(-1 === data.entitlement.indexOf("applications")) {
+                if(-1 === data.entitlement.indexOf("urn:vnd:oauth2:applications")) {
                     alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
                 }
             },
