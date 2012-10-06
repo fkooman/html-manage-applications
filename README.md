@@ -49,13 +49,13 @@ information will be relevant:
 
 <table>
   <tr>
-    <th>Identifier</th><td>application_manager</td>
+    <th>Identifier</th><td>html-manage-applications</td>
   </tr>
   <tr>
-    <th>Name</th><td>Manage Applications</td>
+    <th>Name</th><td>Manage OAuth Client Applications</td>
   </tr>
   <tr>
-    <th>Description</th><td>This application can be used by administrators to manage applications.</td>
+    <th>Description</th><td>This application can be used by administrators to manage OAuth client application registrations.</td>
   </tr>
   <tr>
     <th>Profile</th><td>User-agent-based Application</td>

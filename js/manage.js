@@ -1,24 +1,24 @@
 $(document).ready(function () {
-    var apiClientId = 'application_manager';
+    var apiClientId = 'html-manage-applications';
     var apiScope = ["applications"];
 
     var authorizeEndpoint = 'http://localhost/php-oauth/authorize.php';
     var apiEndpoint = 'http://localhost/php-oauth/api.php';
 
     jso_configure({
-        "application_manager": {
+        "html-manage-applications": {
             client_id: apiClientId,
             authorization: authorizeEndpoint
         }
     });
     jso_ensureTokens({
-        "application_manager": apiScope
+        "html-manage-applications": apiScope
     });
 
     function renderApplicationList() {
         $.oajax({
             url: apiEndpoint + "/applications/",
-            jso_provider: "application_manager",
+            jso_provider: "html-manage-applications",
             jso_scopes: apiScope,
             jso_allowia: true,
             dataType: 'json',
@@ -47,7 +47,7 @@ $(document).ready(function () {
     function deleteApplication(clientId) {
         $.oajax({
             url: apiEndpoint + "/applications/" + clientId,
-            jso_provider: "application_manager",
+            jso_provider: "html-manage-applications",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "DELETE",
@@ -66,7 +66,7 @@ $(document).ready(function () {
             // application specified, we edit
             $.oajax({
                 url: apiEndpoint + "/applications/" + clientId,
-                jso_provider: "application_manager",
+                jso_provider: "html-manage-applications",
                 jso_scopes: apiScope,
                 jso_allowia: true,
                 success: function (data) {
@@ -115,7 +115,7 @@ $(document).ready(function () {
     function updateApplication(clientId, clientData) {
         $.oajax({
             url: apiEndpoint + "/applications/" + clientId,
-            jso_provider: "application_manager",
+            jso_provider: "html-manage-applications",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "PUT",
@@ -135,7 +135,7 @@ $(document).ready(function () {
     function addApplication(clientData) {
         $.oajax({
             url: apiEndpoint + "/applications/",
-            jso_provider: "application_manager",
+            jso_provider: "html-manage-applications",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "POST",
@@ -155,7 +155,7 @@ $(document).ready(function () {
     function checkEntitlement() {
         $.oajax({
             url: apiEndpoint + "/resource_owner/entitlement",
-            jso_provider: "application_manager",
+            jso_provider: "html-manage-applications",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "GET",
