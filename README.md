@@ -52,10 +52,10 @@ information will be relevant:
     <th>Identifier</th><td>html-manage-applications</td>
   </tr>
   <tr>
-    <th>Name</th><td>Manage OAuth Client Applications</td>
+    <th>Name</th><td>Manage OAuth Application Registrations</td>
   </tr>
   <tr>
-    <th>Description</th><td>This application can be used by administrators to manage OAuth client application registrations.</td>
+    <th>Description</th><td>Application for administrators to manage OAuth application registrations.</td>
   </tr>
   <tr>
     <th>Profile</th><td>User-agent-based Application</td>
