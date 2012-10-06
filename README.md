@@ -30,16 +30,19 @@ This will download the latest version of those components and everything will
 immediately work.
 
 ## Configuration
+You need to configure the application to point to your OAuth server. This can
+be done by copying `config/config.js.default` to `config/config.js` and 
+modifying the `config.js` file to suit your situation.
 
-You may need to modify both `authorizeEndpoint` and `apiEndpoint` in 
-`js/manage.js` when your OAuth server is not configured at 
-`http://localhost/php-oauth`. So you need to change the following lines:
+This is the default configuration:
 
+    var apiClientId = 'html-manage-applications';
     var authorizeEndpoint = 'http://localhost/php-oauth/authorize.php';
     var apiEndpoint = 'http://localhost/php-oauth/api.php';
 
-To for example:
+For example, for your situation it may need to be this:
 
+    var apiClientId = 'html-manage-applications';
     var authorizeEndpoint = 'https://www.example.org/php-oauth/authorize.php';
     var apiEndpoint = 'https://www.example.org/php-oauth/api.php';
 

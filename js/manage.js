@@ -1,9 +1,5 @@
 $(document).ready(function () {
-    var apiClientId = 'html-manage-applications';
     var apiScope = ["applications"];
-
-    var authorizeEndpoint = 'http://localhost/php-oauth/authorize.php';
-    var apiEndpoint = 'http://localhost/php-oauth/api.php';
 
     jso_configure({
         "html-manage-applications": {

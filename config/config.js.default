@@ -1,0 +1,3 @@
+var apiClientId = 'html-manage-applications';
+var authorizeEndpoint = 'http://localhost/php-oauth/authorize.php';
+var apiEndpoint = 'http://localhost/php-oauth/api.php';
