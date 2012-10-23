@@ -150,7 +150,7 @@ $(document).ready(function () {
 
     function checkEntitlement() {
         $.oajax({
-            url: apiEndpoint + "/resource_owner/attributes",
+            url: attributesEndpoint,
             jso_provider: "html-manage-applications",
             jso_scopes: apiScope,
             jso_allowia: true,
