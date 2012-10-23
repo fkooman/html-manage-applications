@@ -150,7 +150,7 @@ $(document).ready(function () {
 
     function checkEntitlement() {
         $.oajax({
-            url: apiEndpoint + "/resource_owner/entitlement",
+            url: apiEndpoint + "/resource_owner/attributes",
             jso_provider: "html-manage-applications",
             jso_scopes: apiScope,
             jso_allowia: true,
@@ -158,7 +158,7 @@ $(document).ready(function () {
             dataType: 'json',
             async: false,
             success: function (data) {
-                if(-1 === data.entitlement.indexOf("urn:vnd:oauth2:applications")) {
+                if(!data.entitlement || -1 === data.entitlement.indexOf("urn:vnd:oauth2:applications")) {
                     alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
                 }
             },
