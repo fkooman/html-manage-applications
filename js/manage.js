@@ -149,21 +149,24 @@ $(document).ready(function () {
     }
 
     function checkEntitlement() {
-        $.ajax({
-            url: tokenInfoEndpoint + "?access_token=" + jso_getToken("html-manage-applications"),
-            dataType: 'json',
-            type: "GET",
-            async: false,
-            success: function (data) {
-                if(!data.attributes || !data.attributes.entitlement || -1 === data.attributes.entitlement.indexOf("urn:vnd:oauth2:applications")) {
-                    alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
+        var accessToken = jso_getToken("html-manage-applications");
+        if(accessToken) {
+            $.ajax({
+                url: tokenInfoEndpoint + "?access_token=" + accessToken,
+                dataType: 'json',
+                type: "GET",
+                async: false,
+                success: function (data) {
+                    if(!data.attributes || !data.attributes.entitlement || -1 === data.attributes.entitlement.indexOf("urn:vnd:oauth2:applications")) {
+                        alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
+                    }
+                },
+                error: function (xhr) {
+                    var data = JSON.parse(xhr.responseText);
+                    alert("ERROR: " + data.error_description);
                 }
-            },
-            error: function (xhr) {
-                var data = JSON.parse(xhr.responseText);
-                alert("ERROR: " + data.error_description);
-            }
-        });
+            });
+        }
 
     }
 
