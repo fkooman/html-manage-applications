@@ -149,16 +149,13 @@ $(document).ready(function () {
     }
 
     function checkEntitlement() {
-        $.oajax({
-            url: attributesEndpoint,
-            jso_provider: "html-manage-applications",
-            jso_scopes: apiScope,
-            jso_allowia: true,
-            type: "GET",
+        $.ajax({
+            url: tokenInfoEndpoint + "?access_token=" + jso_getToken("html-manage-applications"),
             dataType: 'json',
+            type: "GET",
             async: false,
             success: function (data) {
-                if(!data.entitlement || -1 === data.entitlement.indexOf("urn:vnd:oauth2:applications")) {
+                if(!data.attributes || !data.attributes.entitlement || -1 === data.attributes.entitlement.indexOf("urn:vnd:oauth2:applications")) {
                     alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
                 }
             },

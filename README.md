@@ -36,17 +36,17 @@ modifying the `config.js` file to suit your situation.
 
 This is the default configuration:
 
-    var apiClientId        = 'html-manage-applications';
-    var authorizeEndpoint  = 'http://localhost/php-oauth/authorize.php';
-    var attributesEndpoint = 'http://localhost/php-oauth/api.php/resource_owner/attributes';
-    var apiEndpoint        = 'http://localhost/php-oauth/api.php';
+    var apiClientId       = 'html-manage-applications';
+    var authorizeEndpoint = 'http://localhost/php-oauth/authorize.php';
+    var tokenInfoEndpoint = 'http://localhost/php-oauth/tokeninfo.php';
+    var apiEndpoint       = 'http://localhost/php-oauth/api.php';
 
 For example, for your situation it may need to be this:
 
-    var apiClientId        = 'html-manage-applications';
-    var authorizeEndpoint  = 'https://www.example.org/php-oauth/authorize.php';
-    var attributesEndpoint = 'https://www.example.org/php-oauth/api.php/resource_owner/attributes';
-    var apiEndpoint        = 'https://www.example.org/php-oauth/api.php';
+    var apiClientId       = 'html-manage-applications';
+    var authorizeEndpoint = 'https://www.example.org/php-oauth/authorize.php';
+    var tokenInfoEndpoint = 'https://www.example.org/php-oauth/tokeninfo.php';
+    var apiEndpoint       = 'https://www.example.org/php-oauth/api.php';
 
 ## Client Registration
 Also, make sure that this client is registered in your OAuth server. The following
