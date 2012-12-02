@@ -157,7 +157,7 @@ $(document).ready(function () {
                 type: "GET",
                 async: false,
                 success: function (data) {
-                    if(!data.attributes || !data.attributes.eduPersonEntitlement || -1 === data.attributes.eduPersonEntitlement.indexOf("urn:vnd:oauth2:applications")) {
+                    if(!data.attributes || !data.attributes.eduPersonEntitlement || -1 === data.attributes.eduPersonEntitlement.indexOf("urn:x-oauth:entitlement:applications")) {
                         alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
                     }
                 },
