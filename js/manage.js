@@ -152,12 +152,12 @@ $(document).ready(function () {
         var accessToken = jso_getToken("html-manage-applications");
         if(accessToken) {
             $.ajax({
-                url: tokenInfoEndpoint + "?access_token=" + accessToken,
+                url: introspectionEndpoint + "?token=" + accessToken,
                 dataType: 'json',
                 type: "GET",
                 async: false,
                 success: function (data) {
-                    if(!data.attributes || !data.attributes.eduPersonEntitlement || -1 === data.attributes.eduPersonEntitlement.indexOf("urn:x-oauth:entitlement:applications")) {
+                    if(!data['x-entitlement'] || -1 === data['x-entitlement'].indexOf("urn:x-oauth:entitlement:applications")) {
                         alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
                     }
                 },
