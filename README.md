@@ -1,35 +1,16 @@
-# OAuth Applications
+# Introduction
+This application makes it possible to manage application with the `php-oauth` 
+authorization server through its API.
 
-## Introduction
-
-This application makes it possible to manage applications with the `php-oauth` 
-service through its API.
-
-## Screenshots
-
+# Screenshot
 ![html-manage-applications](https://github.com/fkooman/html-manage-applications/raw/master/docs/html-manage-applications-screenshot.png)
 
-![html-manage-applications-new-app-1](https://github.com/fkooman/html-manage-applications/raw/master/docs/html-manage-applications-new-app-screenshot-1.png)
+# Installation
+You can use [Bower](http://bower.io) to install the dependencies.
 
-![html-manage-applications-new-app-2](https://github.com/fkooman/html-manage-applications/raw/master/docs/html-manage-applications-new-app-screenshot-2.png)
+    $ bower install
 
-## Installation
-
-This application depends on the following components:
-
-* jQuery
-* JSrender (JavaScript Template Rendering for jQuery)
-* JSO (JavaScript OAuth 2 client)
-* Bootstrap CSS
-
-It can easily be installed by running the following script:
-
-    $ sh docs/install_dependencies.sh
-
-This will download the latest version of those components and everything will
-immediately work.
-
-## Configuration
+# Configuration
 You need to configure the application to point to your OAuth server. This can
 be done by copying `config/config.js.default` to `config/config.js` and 
 modifying the `config.js` file to suit your situation.
@@ -48,29 +29,14 @@ For example, for your situation it may need to be this:
     var introspectionEndpoint = 'https://www.example.org/php-oauth/introspect.php';
     var apiEndpoint           = 'https://www.example.org/php-oauth/api.php';
 
-## Client Registration
-Also, make sure that this client is registered in your OAuth server. The following
-information will be relevant:
+# Client Registration
+Also, make sure that this client is registered in your OAuth server. The 
+following information could be relevant:
 
-<table>
-  <tr>
-    <th>Identifier</th><td>html-manage-applications</td>
-  </tr>
-  <tr>
-    <th>Name</th><td>Manage OAuth Application Registrations</td>
-  </tr>
-  <tr>
-    <th>Description</th><td>Application for administrators to manage OAuth application registrations.</td>
-  </tr>
-  <tr>
-    <th>Profile</th><td>User-agent-based Application</td>
-  </tr>
-  <tr>
-    <th>Secret</th><td><em>NONE</em></td>
-  </tr>
-  <tr>
-    <th>Redirect URI</th><td>https://www.example.org/html-manage-applications/index.html</td>
-  </tr>
-</table>
-
-That should be all!
+* **Identifier**: html-manage-applications
+* **Name**: Manage OAuth Application Registrations
+* **Description**: Application for administrators to manage OAuth application 
+  registrations.
+* **Profile**: User-agent-based Application
+* **Secret**: _NONE_
+* **Redirect URI**: https://www.example.org/html-manage-applications/index.html
