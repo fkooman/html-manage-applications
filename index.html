@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>Application Management</title>
-    <!-- Bootstrap -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
 </head>
 <body>
 
-    <div id="editApplication" class="modal hide fade">
+    <div id="editApplication" class="modal fade">
     </div>
 
     <div class="container">
@@ -26,60 +26,52 @@
             </thead>
             	<tbody id="applicationList"></tbody>
             </table>
-
-            <!-- <p class="text-info"><span class="label label-info">Info</span> <small>This is the list of all applications registered with this OAuth service.</small></p> -->
-
         </div> <!-- /applications -->
     </div> <!-- /container -->
 
     <script id="applicationListTemplate" type="text/x-jsrender">
         <tr>
-            <td><span title="{{:description}}">{{:name}}</span><a class="editApplication" data-client-id="{{:id}}" href="#"> <i class="icon-edit"></i></a></td>
+            <td><span title="{{:description}}">{{:name}}</span>
+                <a class="editApplication" data-client-id="{{:id}}" href="#"> <span class="glyphicon glyphicon-edit"></span></a>
+            </td>
             <td>
-                <button class="btn btn-danger btn-small deleteApplication" data-client-name="{{:name}}" data-client-id="{{:id}}"><i class="icon-trash icon-white"></i> Delete</button>
+                <button class="btn btn-danger btn-sm deleteApplication" data-client-name="{{:name}}" data-client-id="{{:id}}"><span class="glyphicon glyphicon-trash"></span> Delete</button>
             </td>
         </tr>
     </script>
    
     <script id="applicationEditTemplate" type="text/x-jsrender">
-        <div class="modal-header">
-            <a class="close editClose" aria-hidden="true">&times;</a>
-            <h3>Application Registration</h3>
-        </div>
-        <div class="modal-body">
-
-          <form class="form editApplication form-horizontal">
-            <fieldset>
-
-                    <div class="control-group">
-                        <label class="control-label" for="form_id"><strong>Identifier</strong></label>
-                        <div class="controls">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close editClose" aria-hidden="true">&times;</a>
+                    <h3>Application Registration</h3>
+                </div> <!-- /.modal-header -->
+                <div class="modal-body">
+                    <form role="form" class="form editApplication">
+                        <div class="form-group">
+                            <label for="form_id">Identifier</label>
                             {{if id}}
-                                <span id="form_id" class="input-xlarge uneditable-input">{{:id}}</span>
+                                <input class="form-control" id="form_id" type="text" name="id" value="{{:id}}" disabled>
                                 <input type="hidden" name="id" value="{{:id}}">
                             {{else}}
-                                <input type="text" id="form_id" class="input-xlarge" name="id" placeholder="Unique Application Identifier...">
+                                <input class="form-control" type="text" name="id" placeholder="Unique Application Identifier...">
                             {{/if}}
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="form_name"><strong>Name</strong></label>
-                        <div class="controls">
-                            <input type="text" id="form_name" class="input-xlarge" name="name" value="{{:name}}" placeholder="Application Name...">
+                        <div class="form-group">
+                            <label for="form_name">Name</label>
+                            <input class="form-control" type="text" id="form_name" name="name" value="{{:name}}" placeholder="Application Name...">
                         </div>
-                    </div>
 
-
-                    <div class="control-group">
-                        <label class="control-label" for="form_type"><strong>Profile</strong></label>
-                        <div class="controls">
-                            <select id="form_type" class="input-xlarge" name="type">
+                        <div class="form-group">
+                            <label for="form_type">Profile</label>
+                            <select class="form-control" id="form_type" name="type">
                                 <option value="web_application" {{if type === 'web_application' }} selected="selected" {{/if}}>Web Application</option>
                                 <option value="user_agent_based_application" {{if type === 'user_agent_based_application' }} selected="selected" {{/if}}>User-agent-based Application</option>
                                 <option value="native_application" {{if type === 'native_application' }} selected="selected" {{/if}}>Native Application</option>
                             </select>
-                            <span class="help-block">
+                            <!-- <span class="help-block">
                                 <dl>
                                     <dt>Web Application</dt>
                                     <dd>A client running on a web server, like 3-legged OAuth 1.0a, MUST have a secret.</dd>
@@ -88,67 +80,48 @@
                                     <dt>Native Application</dt>
                                     <dd>The client runs on a mobile device or is a 'rich' desktop application.</dd>
                                 </dl>
-                            </span>
+                            </span> -->
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="form_redirect_uri"><strong>Redirect URI</strong></label>
-                        <div class="controls">
-                            <input type="text" id="form_redirect_uri" class="input-xlarge" name="redirect_uri" value="{{:redirect_uri}}" placeholder="Redirect URI...">
+                        <div class="form-group">
+                            <label for="form_redirect_uri">Redirect URI</label>
+                            <input type="text" class="form-control" id="form_redirect_uri" name="redirect_uri" value="{{:redirect_uri}}" placeholder="Redirect URI...">
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="form_secret">Secret</label>
-                        <div class="controls">
-                            <input type="text" id="form_secret" class="input-xlarge" name="secret" value="{{:secret}}" placeholder="Secret for Web Application...">
+                        <div class="form-group">
+                            <label for="form_secret">Secret</label>
+                            <input type="text" class="form-control" id="form_secret" name="secret" value="{{:secret}}" placeholder="Secret for Web Application...">
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="form_description">Description</label>
-                        <div class="controls">
-                            <textarea id="form_description" class="input-xlarge" name="description" placeholder="Application Description...">{{:description}}</textarea>
+                        <div class="form-group">
+                            <label for="form_description">Description</label>
+                            <textarea class="form-control" id="form_description" rows="5" name="description" placeholder="Application Description...">{{:description}}</textarea>
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="form_icon">Icon</label>
-                        <div class="controls">
-                            <input type="text" id="form_icon" class="input-xlarge" name="icon" value="{{:icon}}" placeholder="URL to 128x128 Application Icon...">
+                        <div class="form-group">
+                            <label for="form_icon">Icon</label>
+                            <input type="text" class="form-control" id="form_icon" name="icon" value="{{:icon}}" placeholder="URL to 128x128 Application Icon...">
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="form_allowed_scope">Allowed Scope</label>
-                        <div class="controls">
-                            <input type="text" id="form_allowed_scope" class="input-xlarge" name="allowed_scope" value="{{:allowed_scope}}" placeholder="Space Separated Scopes...">
+                        <div class="form-group">
+                            <label for="form_allowed_scope">Allowed Scope</label>
+                            <input type="text" class="form-control" id="form_allowed_scope" name="allowed_scope" value="{{:allowed_scope}}" placeholder="Space Separated Scopes...">
                         </div>
-                    </div>
 
-                    <div class="control-group">
-                        <label class="control-label" for="form_contact_email" title="">Contact</label>
-                        <div class="controls">
-                            <input type="text" id="form_contact_email" class="input-xlarge" name="contact_email" value="{{:contact_email}}" placeholder="Email Address...">
+                        <div class="form-group">
+                            <label for="form_contact">Contact</label>
+                            <input type="text" class="form-control" id="form_contact" name="contact_email" value="{{:contact_email}}" placeholder="Email Address...">
                         </div>
-                    </div>
-    <!--        <p><strong>* required</strong></p> -->
+                    </form>
+                </div> <!-- /.modal-body -->
 
-
-         <!-- <button data-client-id="{{:id}}" class="btn btn-primary editSave">Save</button>
-          <button data-client-id="{{:id}}" class="btn editClose">Close</button> -->
-
-      </fieldset>
-
-          </form>
-
-        </div>
-        <div class="modal-footer">
-            <a href="#" class="btn editClose">Close</a>
-            <a href="#" class="btn btn-primary editSave" data-client-id="{{:id}}">Save changes</a>
-        </div>
-
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default editClose">Close</a>
+                    <a href="#" class="btn btn-primary editSave" data-client-id="{{:id}}">Save changes</a>
+                </div>
+            
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
     </script>
 
     <script src="bower_components/jquery/jquery.js"></script>
