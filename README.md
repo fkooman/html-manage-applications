@@ -3,7 +3,7 @@ This application makes it possible to manage application with the `php-oauth`
 authorization server through its API.
 
 # Screenshot
-![html-manage-applications](https://github.com/fkooman/html-manage-applications/raw/master/docs/html-manage-applications-screenshot.png)
+![html-manage-applications](https://github.com/fkooman/html-manage-applications/raw/master/docs/html-manage-applications.png)
 
 # Installation
 You can use [Bower](http://bower.io) to install the dependencies.
