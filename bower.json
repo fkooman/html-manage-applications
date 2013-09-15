@@ -1,0 +1,8 @@
+{
+  "name": "html-manage-applications",
+  "dependencies": {
+    "bootstrap": "~3.0.0",
+    "jsrender": "~1.0.0-beta",
+    "jso": "https://github.com/andreassolberg/jso.git"
+  }
+}
