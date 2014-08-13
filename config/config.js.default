@@ -1,4 +1,4 @@
 var apiClientId           = 'html-manage-applications';
-var authorizeEndpoint     = 'http://localhost/php-oauth/authorize.php';
-var introspectionEndpoint = 'http://localhost/php-oauth/introspect.php';
-var apiEndpoint           = 'http://localhost/php-oauth/api.php';
+var authorizeEndpoint     = 'https://www.example.org/php-oauth-as/authorize.php';
+var introspectionEndpoint = 'https://www.example.org/php-oauth-as/introspect.php';
+var apiEndpoint           = 'https://www.example.org/php-oauth-as/api.php';
