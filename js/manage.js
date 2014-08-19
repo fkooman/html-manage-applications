@@ -2,19 +2,19 @@ $(document).ready(function () {
     var apiScope = ["http://php-oauth.net/scope/manage"];
 
     jso_configure({
-        "https://www.php-oauth.net/app/manage": {
-            client_id: 'https://www.php-oauth.net/app/manage',
+        "http://php-oauth.net/app/manage": {
+            client_id: 'http://php-oauth.net/app/manage',
             authorization: baseUrl + 'authorize.php'
         }
     });
     jso_ensureTokens({
-        "https://www.php-oauth.net/app/manage": apiScope
+        "http://php-oauth.net/app/manage": apiScope
     });
 
     function renderApplicationList() {
         $.oajax({
             url: baseUrl + 'api.php' + "/applications/",
-            jso_provider: "https://www.php-oauth.net/app/manage",
+            jso_provider: "http://php-oauth.net/app/manage",
             jso_scopes: apiScope,
             jso_allowia: true,
             dataType: 'json',
@@ -43,7 +43,7 @@ $(document).ready(function () {
     function deleteApplication(clientId) {
         $.oajax({
             url: baseUrl + 'api.php' + "/applications/" + clientId,
-            jso_provider: "https://www.php-oauth.net/app/manage",
+            jso_provider: "http://php-oauth.net/app/manage",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "DELETE",
@@ -62,7 +62,7 @@ $(document).ready(function () {
             // application specified, we edit
             $.oajax({
                 url: baseUrl + 'api.php' + "/applications/" + clientId,
-                jso_provider: "https://www.php-oauth.net/app/manage",
+                jso_provider: "http://php-oauth.net/app/manage",
                 jso_scopes: apiScope,
                 jso_allowia: true,
                 success: function (data) {
@@ -111,7 +111,7 @@ $(document).ready(function () {
     function updateApplication(clientId, clientData) {
         $.oajax({
             url: baseUrl + 'api.php' + "/applications/" + clientId,
-            jso_provider: "https://www.php-oauth.net/app/manage",
+            jso_provider: "http://php-oauth.net/app/manage",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "PUT",
@@ -131,7 +131,7 @@ $(document).ready(function () {
     function addApplication(clientData) {
         $.oajax({
             url: baseUrl + 'api.php' + "/applications/",
-            jso_provider: "https://www.php-oauth.net/app/manage",
+            jso_provider: "http://php-oauth.net/app/manage",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "POST",
@@ -149,7 +149,7 @@ $(document).ready(function () {
     }
 
     function checkEntitlement() {
-        var accessToken = jso_getToken("https://www.php-oauth.net/app/manage");
+        var accessToken = jso_getToken("http://php-oauth.net/app/manage");
         if(accessToken) {
             $.ajax({
                 url: baseUrl + 'introspect.php' + "?token=" + accessToken,
