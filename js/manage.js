@@ -1,20 +1,20 @@
 $(document).ready(function () {
-    var apiScope = ["applications"];
+    var apiScope = ["http://php-oauth.net/scope/manage"];
 
     jso_configure({
-        "html-manage-applications": {
-            client_id: apiClientId,
-            authorization: authorizeEndpoint
+        "https://www.php-oauth.net/app/manage": {
+            client_id: 'https://www.php-oauth.net/app/manage',
+            authorization: baseUrl + 'authorize.php'
         }
     });
     jso_ensureTokens({
-        "html-manage-applications": apiScope
+        "https://www.php-oauth.net/app/manage": apiScope
     });
 
     function renderApplicationList() {
         $.oajax({
-            url: apiEndpoint + "/applications/",
-            jso_provider: "html-manage-applications",
+            url: baseUrl + 'api.php' + "/applications/",
+            jso_provider: "https://www.php-oauth.net/app/manage",
             jso_scopes: apiScope,
             jso_allowia: true,
             dataType: 'json',
@@ -42,8 +42,8 @@ $(document).ready(function () {
 
     function deleteApplication(clientId) {
         $.oajax({
-            url: apiEndpoint + "/applications/" + clientId,
-            jso_provider: "html-manage-applications",
+            url: baseUrl + 'api.php' + "/applications/" + clientId,
+            jso_provider: "https://www.php-oauth.net/app/manage",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "DELETE",
@@ -61,8 +61,8 @@ $(document).ready(function () {
         if (clientId) {
             // application specified, we edit
             $.oajax({
-                url: apiEndpoint + "/applications/" + clientId,
-                jso_provider: "html-manage-applications",
+                url: baseUrl + 'api.php' + "/applications/" + clientId,
+                jso_provider: "https://www.php-oauth.net/app/manage",
                 jso_scopes: apiScope,
                 jso_allowia: true,
                 success: function (data) {
@@ -110,8 +110,8 @@ $(document).ready(function () {
 
     function updateApplication(clientId, clientData) {
         $.oajax({
-            url: apiEndpoint + "/applications/" + clientId,
-            jso_provider: "html-manage-applications",
+            url: baseUrl + 'api.php' + "/applications/" + clientId,
+            jso_provider: "https://www.php-oauth.net/app/manage",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "PUT",
@@ -130,8 +130,8 @@ $(document).ready(function () {
 
     function addApplication(clientData) {
         $.oajax({
-            url: apiEndpoint + "/applications/",
-            jso_provider: "html-manage-applications",
+            url: baseUrl + 'api.php' + "/applications/",
+            jso_provider: "https://www.php-oauth.net/app/manage",
             jso_scopes: apiScope,
             jso_allowia: true,
             type: "POST",
@@ -149,15 +149,15 @@ $(document).ready(function () {
     }
 
     function checkEntitlement() {
-        var accessToken = jso_getToken("html-manage-applications");
+        var accessToken = jso_getToken("https://www.php-oauth.net/app/manage");
         if(accessToken) {
             $.ajax({
-                url: introspectionEndpoint + "?token=" + accessToken,
+                url: baseUrl + 'introspect.php' + "?token=" + accessToken,
                 dataType: 'json',
                 type: "GET",
                 async: false,
                 success: function (data) {
-                    if(!data['x-entitlement'] || -1 === data['x-entitlement'].indexOf("urn:x-oauth:entitlement:applications")) {
+                    if(!data['x-entitlement'] || -1 === data['x-entitlement'].indexOf("http://php-oauth.net/entitlement/manage")) {
                         alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
                     }
                 },
