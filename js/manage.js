@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     jso_configure({
         "http://php-oauth.net/app/manage": {
-            client_id: 'http://php-oauth.net/app/manage',
+            client_id: clientId,
             authorization: baseUrl + 'authorize.php'
         }
     });
