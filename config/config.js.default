@@ -1,1 +1,2 @@
+var clientId = '2352ea44-612d-448b-be10-6e29562e5130';
 var baseUrl = 'https://www.example.org/php-oauth-as/';
