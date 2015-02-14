@@ -19,7 +19,6 @@ This is the default configuration:
 
     var apiClientId           = 'html-manage-applications';
     var authorizeEndpoint     = 'https://www.example.org/php-oauth-as/authorize.php';
-    var introspectionEndpoint = 'https://www.example.org/php-oauth-as/introspect.php';
     var apiEndpoint           = 'https://www.example.org/php-oauth-as/api.php';
 
 # Client Registration

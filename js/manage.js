@@ -24,7 +24,7 @@ $(document).ready(function () {
             },
             error: function (xhr) {
                 var data = JSON.parse(xhr.responseText);
-                alert("ERROR: " + data.error_description);
+                alert("ERROR: " + data.error + "\nDESCRIPTION" + data.error_description);
             }
         });
     }
@@ -148,34 +148,11 @@ $(document).ready(function () {
         });
     }
 
-    function checkEntitlement() {
-        var accessToken = jso_getToken("http://php-oauth.net/app/manage");
-        if(accessToken) {
-            $.ajax({
-                url: baseUrl + 'introspect.php' + "?token=" + accessToken,
-                dataType: 'json',
-                type: "GET",
-                async: false,
-                success: function (data) {
-                    if(!data['x-entitlement'] || -1 === data['x-entitlement'].indexOf("http://php-oauth.net/entitlement/manage")) {
-                        alert("WARNING: you are not entitled to use this application, not all functionality will be available!");
-                    }
-                },
-                error: function (xhr) {
-                    var data = JSON.parse(xhr.responseText);
-                    alert("ERROR: " + data.error_description);
-                }
-            });
-        }
-
-    }
-
     $("button#addApplication").click(function () {
         editApplication();
     });
 
     function initPage() {
-        checkEntitlement();
         renderApplicationList();
     }
     initPage();
